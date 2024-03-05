@@ -1,9 +1,9 @@
 package com.kaique.DsLearn.domain.entities;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,6 +28,9 @@ public class Offer {
 	@JoinColumn(name = "course_id")
 	@ManyToOne
 	private Course course;
+	
+	@OneToMany(mappedBy = "offer")
+	private List<Resource> resources = new ArrayList<>();
 
 	public Offer() {
 	}
@@ -77,6 +81,10 @@ public class Offer {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public List<Resource> getResources() {
+		return resources;
 	}
 
 	@Override
