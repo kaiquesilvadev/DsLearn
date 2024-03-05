@@ -27,7 +27,7 @@ public class Notification {
 	
 	@CreationTimestamp
 	private OffsetDateTime moment;
-	private Boolean read = false;
+	private Boolean read;
 	private String route;
 	
 	@JoinColumn(name = "user_id")
