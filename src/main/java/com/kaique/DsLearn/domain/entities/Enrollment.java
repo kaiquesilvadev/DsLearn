@@ -1,13 +1,18 @@
 package com.kaique.DsLearn.domain.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import org.hibernate.bytecode.internal.bytebuddy.PrivateAccessorException;
 
 import com.kaique.DsLearn.domain.entities.pk.EnrollmentPk;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,12 +27,14 @@ public class Enrollment {
 	private boolean available;
 	private boolean onlyUpdate;
 	
+	@ManyToMany(mappedBy = "enrollmentsDone")
+	private Set<Lesson> lessonsDone = new HashSet<>();
+	
 	public Enrollment() {
 	}
 
 	public Enrollment(User user, Offer offer, Instant enrollMoment, Instant refundMoment, boolean available,
 			boolean onlyUpdate) {
-		super();
 		id.setUser(user);
 		id.setOffer(offer);
 		this.enrollMoment = enrollMoment;
@@ -82,6 +89,10 @@ public class Enrollment {
 
 	public void setOnlyUpdate(boolean onlyUpdate) {
 		this.onlyUpdate = onlyUpdate;
+	}
+
+	public Set<Lesson> getLessonsDone() {
+		return lessonsDone;
 	}
 
 	@Override
