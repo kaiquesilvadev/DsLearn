@@ -1,5 +1,7 @@
 package com.kaique.DsLearn.domain.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.kaique.DsLearn.domain.entities.enuns.ResourceType;
@@ -28,6 +30,8 @@ public class Resource {
 	@ManyToOne
 	@JoinColumn(name = "offer_id")
 	private Offer offer;
+	
+	private List<Section> sections = new ArrayList<>();
 
 	public Resource() {
 	}
@@ -97,6 +101,10 @@ public class Resource {
 
 	public void setOffer(Offer offer) {
 		this.offer = offer;
+	}
+
+	public List<Section> getSections() {
+		return sections;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class Offer {
 	
 	@OneToMany(mappedBy = "offer")
 	private List<Resource> resources = new ArrayList<>();
-
+	
 	public Offer() {
 	}
 
