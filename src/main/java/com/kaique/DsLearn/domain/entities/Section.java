@@ -1,5 +1,7 @@
 package com.kaique.DsLearn.domain.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +33,9 @@ public class Section {
 	@ManyToOne
 	@JoinColumn(name = "prerequisite_id")
 	private Section prerequisite;
+	
+	@OneToMany(mappedBy = "section")
+	private List<Lesson> lessons = new ArrayList<>();
 	
 	public Section() {
 	}
@@ -99,6 +105,10 @@ public class Section {
 
 	public void setPrerequisite(Section prerequisite) {
 		this.prerequisite = prerequisite;
+	}
+
+	public List<Lesson> getLessons() {
+		return lessons;
 	}
 
 	@Override
